@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.obektevco.robosum.R;
 import com.obektevco.robosum.obektev_utils.EZToast;
 import com.obektevco.robosum.tournamet_utils.NewTournamentDialog;
+import com.obektevco.robosum.tournamet_utils.TournamentsGson;
 import com.obektevco.robosum.tournamet_utils.TournamentsTable;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
         typeface = ResourcesCompat.getFont(getApplicationContext(), R.font.aldrich);
 
         setupTitle();
-        //setupWelcomeMessage();
 
-        TournamentsTable.setupTournamentsTable(this); //TODO
+        if (TournamentsGson.getRobotsInfo(this) == null)
+            setupWelcomeMessage();
+        else
+            TournamentsTable.setupTournamentsTable(this);
     }
 
     private void setupTitle() {
@@ -84,9 +87,7 @@ public class MainActivity extends AppCompatActivity {
         generateButton.setLayoutParams(buttonParams);
 
         generateButton.setOnClickListener(view -> {
-            NewTournamentDialog.openDialogMenu(this, () -> {
-                // Generate tournaments calendar
-            });
+            NewTournamentDialog.openDialogMenu(this, this::recreate);
         });
 
         parentLayout.addView(noTournamentsTitle);

@@ -24,6 +24,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.obektevco.robosum.R;
 import com.obektevco.robosum.obektev_utils.EZToast;
+import com.obektevco.robosum.obektev_utils.RobotInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -232,34 +233,14 @@ public class NewTournamentDialog {
                 return;
             }
 
+            if (Integer.parseInt(weight) > 1000) {
+                EZToast.toast(activity, activity.getString(R.string.too_big_weight));
+                return;
+            }
+
             summaryInfo.add(new RobotInfo(name, weight));
         }
         listener.onInfoGot(summaryInfo);
-    }
-
-    static class RobotInfo {
-        private String name;
-        private String weight;
-
-        RobotInfo(String name, String weight) {
-            this.name = name;
-            this.weight = weight;
-        }
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getWeight() {
-            return weight;
-        }
-
-        public void setWeight(String weight) {
-            this.weight = weight;
-        }
     }
 
 }

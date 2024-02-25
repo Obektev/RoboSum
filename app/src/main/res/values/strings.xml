@@ -24,12 +24,19 @@
     <string name="robot_name">Имя робота</string>
     <string name="robot_weight">Вес робота</string>
 
+    <string name="weight">Вес</string>
+    <string name="place">Место</string>
+
+    <string name="tournament_table_deleted">Турнирная таблица удалена</string>
     <string name="empty_name_or_weight">У какого-то робота нет названия или веса!</string>
+    <string name="too_big_weight">Вес не может быть больше 1000</string>
 
     <string name="tournaments_table">Турнирная таблица</string>
 
+    <string name="delete_tournaments">Удалить таблицу</string>
 
-    <string name="commands_generated">Команды сгенерированы</string>
+    <string name="battle">Сражение</string>
+
     <string name="comand_name">Название</string>
     <string name="score">Счёт</string>
     <string name="wins">Победы</string>
