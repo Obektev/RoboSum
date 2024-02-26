@@ -3,11 +3,12 @@
     <style name="Base.Theme.RoboSum" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:statusBarColor">@color/background_color</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
     <style name="Theme.RoboSum" parent="Base.Theme.RoboSum" />
-    <color name="background">#fff</color>
+    <color name="success_color">#2B9E3D</color>
+    <color name="background_color">#fff</color>
     <color name="layout_color">#DDDDDD</color>
     <color name="button_color">#B5B5B5</color>
     <color name="table_row">#B5B5B5</color>

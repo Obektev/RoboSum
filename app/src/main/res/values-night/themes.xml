@@ -3,15 +3,16 @@
     <style name="Base.Theme.RoboSum" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:statusBarColor">@color/background_color</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
-    <color name="background">#1E1E1E</color>
+    <color name="background_color">#1E1E1E</color>
     <color name="roundshape">#252525</color>
     <color name="layout_color">#232323</color>
     <color name="button_color">#1B1B1B</color>
 
+    <color name="success_color">#2B9E3D</color>
     <color name="table_row">#2E2F32</color>
 
     <color name="text_main">#EAEAEA</color>

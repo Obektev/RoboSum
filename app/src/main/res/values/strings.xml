@@ -30,9 +30,7 @@
     <string name="tournament_table_deleted">Турнирная таблица удалена</string>
     <string name="empty_name_or_weight">У какого-то робота нет названия или веса!</string>
     <string name="too_big_weight">Вес не может быть больше 1000</string>
-
     <string name="tournaments_table">Турнирная таблица</string>
-
     <string name="delete_tournaments">Удалить таблицу</string>
 
     <string name="battle">Сражение</string>
@@ -41,8 +39,9 @@
     <string name="second_duel">Второй поединок</string>
     <string name="third_duel">Третий поединок</string>
 
-    <string name="apply">Применить</string>
+    <string name="won">Выиграл</string>
 
+    <string name="apply">Применить</string>
     <string name="command_name">Название</string>
     <string name="score">Счёт</string>
     <string name="wins">Победы</string>

@@ -3,12 +3,11 @@ package com.obektevco.robosum.tournamet_utils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.res.ColorStateList;
 import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -19,13 +18,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.obektevco.robosum.R;
+import com.obektevco.robosum.obektev_utils.EZToast;
+import com.obektevco.robosum.obektev_utils.RobotInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class BattleDialog {
-    public static void openBattleDialog(Activity activity, String leftRobot, String topRobot) {
+    public static void openBattleDialog(Activity activity, List<RobotInfo> robots, RobotInfo leftRobot, RobotInfo topRobot) {
+        String leftRobotName = leftRobot.getName();
+        String topRobotName = topRobot.getName();
+
         Typeface typeface = ResourcesCompat.getFont(activity, R.font.aldrich);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -52,8 +57,10 @@ public class BattleDialog {
         versusTextView.setTypeface(typeface);
         versusTextView.setPadding(20, 20, 20, 20);
         versusTextView.setTextSize(19);
-        versusTextView.setText(String.format("%s vs %s", leftRobot, topRobot));
+        versusTextView.setText(String.format("%s vs %s", leftRobotName, topRobotName));
         versusTextView.setGravity(Gravity.CENTER);
+
+        dialogLayout.addView(versusTextView);
 
         TableRow.LayoutParams textParams = new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         textParams.gravity = Gravity.START;
@@ -63,6 +70,7 @@ public class BattleDialog {
         insertText.add(R.string.first_duel);
         insertText.add(R.string.second_duel);
         insertText.add(R.string.third_duel);
+
 
         for (Integer stringResource : insertText) {
             LinearLayout duelLayout = new LinearLayout(activity);
@@ -79,11 +87,53 @@ public class BattleDialog {
 
             AppCompatButton leftRobotButton = new AppCompatButton(activity);
             leftRobotButton.setTextSize(10);
-            leftRobotButton.setText(leftRobot);
+            leftRobotButton.setText(leftRobotName);
 
             AppCompatButton topRobotButton = new AppCompatButton(activity);
             topRobotButton.setTextSize(10);
-            topRobotButton.setText(topRobot);
+            topRobotButton.setText(topRobotName);
+
+            leftRobotButton.setOnClickListener(view -> {
+                topRobotButton.setVisibility(View.GONE);
+                leftRobotButton.setBackgroundColor(activity.getColor(R.color.success_color));
+
+                Map<String, Integer> leftBattleScore = leftRobot.getBattleScore();
+                leftBattleScore.putIfAbsent(topRobot.getName(), 1);
+
+                Integer leftScore = leftBattleScore.get(topRobot.getName());
+                leftScore++;
+                leftBattleScore.put(topRobot.getName(), leftScore);
+
+                if (leftScore >= 2) {
+                    EZToast.toast(activity,
+                            String.format("%s %s %s", leftRobotName,
+                                    activity.getString(R.string.won),
+                                    topRobotName));
+                    leftRobot.addWinOnOtherRobot(topRobotName);
+                    TournamentsGson.saveRobotsInfo(activity, robots);
+                }
+            });
+
+            topRobotButton.setOnClickListener(view -> {
+                leftRobotButton.setVisibility(View.GONE);
+                topRobotButton.setBackgroundColor(activity.getColor(R.color.success_color));
+
+                Map<String, Integer> topBattleScore = topRobot.getBattleScore();
+                topBattleScore.putIfAbsent(topRobotName, 1);
+
+                Integer topScore = topBattleScore.get(leftRobotName);
+                topScore++;
+                topBattleScore.put(leftRobotName, topScore);
+
+                if (topScore >= 2) {
+                    EZToast.toast(activity,
+                            String.format("%s %s %s", topRobotName,
+                                    activity.getString(R.string.won),
+                                    leftRobotName));
+                    topRobot.addWinOnOtherRobot(leftRobotName);
+                    TournamentsGson.saveRobotsInfo(activity, robots);
+                }
+            });
 
             duelLayout.addView(duelTextView);
             duelLayout.addView(leftRobotButton);
@@ -105,7 +155,7 @@ public class BattleDialog {
         applyButton.setTextSize(22);
         applyButton.setTextColor(activity.getColor(R.color.text_main));
         applyButton.setBackground(AppCompatResources.getDrawable(activity, R.drawable.round_shape));
-        applyButton.setBackgroundTintList(ColorStateList.valueOf(activity.getColor(R.color.button_color)));
+        //applyButton.setBackgroundTintList(ColorStateList.valueOf(activity.getColor(R.color.button_color)));
         applyButton.setLayoutParams(buttonParams);
 
         dialogLayout.addView(applyButton);

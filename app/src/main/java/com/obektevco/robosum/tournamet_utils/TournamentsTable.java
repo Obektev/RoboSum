@@ -1,14 +1,8 @@
 package com.obektevco.robosum.tournamet_utils;
 
-import static android.content.Intent.getIntent;
-
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,16 +18,11 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
 import com.obektevco.robosum.R;
-import com.obektevco.robosum.obektev_utils.EZToast;
 import com.obektevco.robosum.obektev_utils.RobotInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 public class TournamentsTable {
 
@@ -107,7 +96,7 @@ public class TournamentsTable {
 
         TableRow tableRow = new TableRow(activity);
         tableRow.setLayoutParams(rowParams);
-        tableRow.setBackgroundColor(activity.getColor(R.color.background));
+        tableRow.setBackgroundColor(activity.getColor(R.color.background_color));
         tableRow.setGravity(Gravity.CENTER);
 
         for (int i = 0; i < robotsInfo.size() + 1; i++) {
@@ -194,23 +183,28 @@ public class TournamentsTable {
                                     else {
                                         RobotInfo leftRobot = robotsInfo.get(j);
                                         RobotInfo topRobot = robotsInfo.get(i - 1);
-                                        List<String> leftWinsTop = robotsInfo.get(j).getWinsOnOtherRobots();
-                                        List<String> topWinsLeft = robotsInfo.get(i - 1).getWinsOnOtherRobots();
 
-                                        if (leftWinsTop == null && topWinsLeft == null)
-                                            cellText = "?";
-                                        else {
-                                            if (leftWinsTop != null && leftWinsTop.contains(topRobot.getName()))
-                                                cellText = leftRobot.getName();
-                                            if (topWinsLeft != null && topWinsLeft.contains(leftRobot.getName()))
-                                                cellText = topRobot.getName();
+                                        if (leftRobot == topRobot) { // Avoid doing something with the same robots
+                                            cellText = "-";
+                                        } else {
+
+                                            List<String> leftWinsTop = robotsInfo.get(j).getWinsOnOtherRobots();
+                                            List<String> topWinsLeft = robotsInfo.get(i - 1).getWinsOnOtherRobots();
+
+                                            if (leftWinsTop == null && topWinsLeft == null)
+                                                cellText = "?";
+                                            else {
+                                                if (leftWinsTop != null && leftWinsTop.contains(topRobot.getName()))
+                                                    cellText = leftRobot.getName();
+                                                if (topWinsLeft != null && topWinsLeft.contains(leftRobot.getName()))
+                                                    cellText = topRobot.getName();
+                                            }
+
+
+                                            cellTextView.setOnClickListener(view -> {
+                                                BattleDialog.openBattleDialog(activity, robotsInfo, leftRobot, topRobot);
+                                            });
                                         }
-
-
-                                        cellTextView.setOnClickListener(view -> {
-                                            BattleDialog.openBattleDialog(activity, leftRobot.getName(), topRobot.getName());
-                                        });
-
                                     }
 
                 cellTextView.setText(cellText);

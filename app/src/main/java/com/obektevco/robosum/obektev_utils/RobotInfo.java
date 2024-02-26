@@ -1,7 +1,5 @@
 package com.obektevco.robosum.obektev_utils;
 
-import com.obektevco.robosum.tournamet_utils.BattleInfo;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +10,7 @@ public class RobotInfo {
     private String weight;
     private Integer place = -1;
 
-    private Map<String, BattleInfo> battleCompany = new HashMap<>();
+    private Map<String, Integer> battleScore = new HashMap<>();
     private Integer looses = 0;
     private Integer wins = 0;
 
@@ -82,11 +80,11 @@ public class RobotInfo {
         this.winsOnOtherRobots = winsOnOtherRobots;
     }
 
-    public Map<String, BattleInfo> getBattleCompany() {
-        return battleCompany;
+    public Map<String, Integer> getBattleScore() {
+        return battleScore;
     }
 
-    public void setBattleCompany(Map<String, BattleInfo> battleCompany) {
-        this.battleCompany = battleCompany;
+    public void setBattleScore(Map<String, Integer> battleScore) {
+        this.battleScore = battleScore;
     }
 }
