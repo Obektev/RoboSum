@@ -16,11 +16,12 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.obektevco.robosum.R;
 import com.obektevco.robosum.obektev_utils.EZToast;
 import com.obektevco.robosum.tournamet_utils.NewTournamentDialog;
 import com.obektevco.robosum.tournamet_utils.TournamentsGson;
 import com.obektevco.robosum.tournamet_utils.TournamentsTable;
+
+import com.obektevco.robosum.R;
 
 public class MainActivity extends AppCompatActivity {
     private Typeface typeface;

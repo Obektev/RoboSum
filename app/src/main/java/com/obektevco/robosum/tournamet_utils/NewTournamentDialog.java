@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
-import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +28,8 @@ import com.obektevco.robosum.obektev_utils.RobotInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+
 
 public class NewTournamentDialog {
     private static Typeface typeface;
@@ -93,6 +94,10 @@ public class NewTournamentDialog {
 
         buttonLayout.addView(cancelButton);
         buttonLayout.addView(createButton);
+        // TODO: REMOVE THIS
+        EditText testEditText = new EditText(activity);
+        buttonLayout.addView(testEditText);
+        testEditText.setVisibility(View.GONE);
 
         ScrollView scrollView = new ScrollView(activity);
         ViewGroup.LayoutParams scrollViewParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 280);
@@ -191,15 +196,21 @@ public class NewTournamentDialog {
             EditText robotNameInput = new EditText(activity);
             robotNameInput.setHint(activity.getString(R.string.robot_name));
             robotNameInput.setTypeface(typeface);
-            robotNameInput.setMaxLines(1);
-            robotNameInput.setImeOptions(EditorInfo.IME_ACTION_DONE); // TODO: REMOVE THIS ON RELEASE
+            robotNameInput.setFocusable(true);
+            robotNameInput.setFocusableInTouchMode(true);
+            robotNameInput.clearFocus();
+            //robotNameInput.setMaxLines(1);
+            //robotNameInput.setImeOptions(EditorInfo.IME_ACTION_DONE); // TODO: REMOVE THIS ON RELEASE
 
             EditText robotWeightInput = new EditText(activity);
             robotWeightInput.setHint(activity.getString(R.string.robot_weight));
+            robotWeightInput.setFocusable(true);
+            robotWeightInput.setFocusableInTouchMode(true);
             robotWeightInput.setTypeface(typeface);
             robotWeightInput.setMaxLines(1);
-            robotWeightInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-            robotWeightInput.setImeOptions(EditorInfo.IME_ACTION_DONE); // TODO: REMOVE THIS ON RELEASE
+            robotWeightInput.clearFocus();
+            //robotWeightInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+            //robotWeightInput.setImeOptions(EditorInfo.IME_ACTION_DONE); // TODO: REMOVE THIS ON RELEASE
 
             inputLayout.addView(nameNumber);
             inputLayout.addView(robotNameInput);

@@ -5,8 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+
 import com.obektevco.robosum.R;
 import com.obektevco.robosum.obektev_utils.EZToast;
 import com.obektevco.robosum.obektev_utils.RobotInfo;

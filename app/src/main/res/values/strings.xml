@@ -36,11 +36,17 @@
     <string name="delete_tournaments">Удалить таблицу</string>
 
     <string name="battle">Сражение</string>
+    <string name="duel">Поединок</string>
+    <string name="first_duel">Первый поединок</string>
+    <string name="second_duel">Второй поединок</string>
+    <string name="third_duel">Третий поединок</string>
 
-    <string name="comand_name">Название</string>
+    <string name="apply">Применить</string>
+
+    <string name="command_name">Название</string>
     <string name="score">Счёт</string>
     <string name="wins">Победы</string>
-    <string name="loses">Пройгрыши</string>
+    <string name="loses">Проигрыши</string>
     <string name="draws">Ничьи</string>
     <string name="draw">Ничья</string>
     <string name="null_commands">Команд не может быть меньше 2</string>

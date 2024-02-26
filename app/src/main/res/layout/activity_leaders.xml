@@ -39,7 +39,7 @@
                     android:fontFamily="@font/aldrichrusbydaymarius"
                     android:textStyle="bold"/>
                 <TextView
-                    android:text="@string/comand_name"
+                    android:text="@string/command_name"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:fontFamily="@font/aldrichrusbydaymarius"
