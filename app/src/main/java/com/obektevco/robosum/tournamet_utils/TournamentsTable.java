@@ -19,10 +19,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.obektevco.robosum.R;
+import com.obektevco.robosum.obektev_utils.RobotComparator;
 import com.obektevco.robosum.obektev_utils.RobotInfo;
+import com.obektevco.robosum.obektev_utils.WinnerDialog;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class TournamentsTable {
 
@@ -94,6 +100,8 @@ public class TournamentsTable {
     private static void addTableHead(Activity activity, TableLayout tableLayout) {
         List<RobotInfo> robotsInfo = TournamentsGson.getRobotsInfo(activity);
 
+
+
         TableRow tableRow = new TableRow(activity);
         tableRow.setLayoutParams(rowParams);
         tableRow.setBackgroundColor(activity.getColor(R.color.background_color));
@@ -104,7 +112,8 @@ public class TournamentsTable {
 
             if (i != 0)
                 cellText = robotsInfo.get(i - 1).getName();
-
+            else
+                cellText = activity.getString(R.string.name);
             TextView headRowTextView = new TextView(activity);
             headRowTextView.setLayoutParams(textParams);
             headRowTextView.setTextColor(activity.getColor(R.color.semi_text));
@@ -120,7 +129,6 @@ public class TournamentsTable {
         List<Integer> stringsResources = new ArrayList<>();
         stringsResources.add(R.string.weight);
         stringsResources.add(R.string.wins);
-        stringsResources.add(R.string.draws);
         stringsResources.add(R.string.loses);
         stringsResources.add(R.string.place);
 
@@ -146,13 +154,25 @@ public class TournamentsTable {
 
         List<RobotInfo> robotsInfo = TournamentsGson.getRobotsInfo(activity);
 
+        assert robotsInfo != null;
+        robotsInfo.sort(new RobotComparator());
+
+        Integer wonBattles = 0;
+        for (RobotInfo info : robotsInfo) {
+            wonBattles += info.getWins();
+        }
+
+        if (wonBattles == robotsInfo.size() * (robotsInfo.size() - 1) / 2) {
+            WinnerDialog.openWinnerDialog(activity, robotsInfo.get(0).getName());
+        }
+
         for (int j = 0; j < robotsInfo.size(); j++) {
             TableRow newTableRow = new TableRow(activity);
             newTableRow.setLayoutParams(rowParams);
             newTableRow.setBackgroundColor(activity.getColor(R.color.table_row));
             newTableRow.setGravity(Gravity.CENTER);
 
-            for (int i = 0; i < robotsInfo.size() + 6; i++) {
+            for (int i = 0; i < robotsInfo.size() + 5; i++) {
                 String cellText = "";
                 TextView cellTextView = new TextView(activity);
                 cellTextView.setLayoutParams(textParams);
@@ -163,8 +183,16 @@ public class TournamentsTable {
                 cellTextView.setTextSize(19);
                 cellTextView.setGravity(Gravity.CENTER);
                 // FRICKING JAVA SWITCH-CASE DOESN'T WORK WITH NON-CONSTANT VALUES
-                if (i == 0)
+                if (i == 0) {
                     cellText = robotsInfo.get(j).getName();
+
+                    if (wonBattles == robotsInfo.size() * (robotsInfo.size() - 1) / 2) {
+                        if (j == 0)
+                            cellText += " 🥇";
+                        if (j > 0 && j < 4)
+                            cellText += " 🥈";
+                    }
+                }
                 else
                     if (i == robotsInfo.size() + 1)
                         cellText = robotsInfo.get(j).getWeight();
@@ -173,39 +201,39 @@ public class TournamentsTable {
                             cellText = String.valueOf(robotsInfo.get(j).getWins());
                         else
                             if (i == robotsInfo.size() + 3)
-                                cellText = String.valueOf(robotsInfo.get(j).getDraws());
+                                cellText = String.valueOf(robotsInfo.get(j).getLooses());
                             else
                                 if (i == robotsInfo.size() + 4)
-                                    cellText = String.valueOf(robotsInfo.get(j).getLooses());
-                                else
-                                    if (i == robotsInfo.size() + 5)
-                                        cellText = String.valueOf(robotsInfo.get(j).getPlace());
-                                    else {
-                                        RobotInfo leftRobot = robotsInfo.get(j);
-                                        RobotInfo topRobot = robotsInfo.get(i - 1);
+                                    cellText = String.valueOf(j + 1);
+                                else {
+                                    RobotInfo leftRobot = robotsInfo.get(j);
+                                    RobotInfo topRobot = robotsInfo.get(i - 1);
 
-                                        if (leftRobot == topRobot) { // Avoid doing something with the same robots
-                                            cellText = "-";
-                                        } else {
+                                    if (i <= j + 1) // Make cells with duplicated darker
+                                        cellTextView.setBackground(AppCompatResources.getDrawable(activity, R.drawable.odd_cell_shape));
 
-                                            List<String> leftWinsTop = robotsInfo.get(j).getWinsOnOtherRobots();
-                                            List<String> topWinsLeft = robotsInfo.get(i - 1).getWinsOnOtherRobots();
+                                    if (leftRobot == topRobot) { // Avoid doing something with the same robots
+                                        cellText = "-";
+                                    } else {
 
-                                            if (leftWinsTop == null && topWinsLeft == null)
-                                                cellText = "?";
-                                            else {
-                                                if (leftWinsTop != null && leftWinsTop.contains(topRobot.getName()))
-                                                    cellText = leftRobot.getName();
-                                                if (topWinsLeft != null && topWinsLeft.contains(leftRobot.getName()))
-                                                    cellText = topRobot.getName();
-                                            }
+                                        List<String> leftWinsTop = robotsInfo.get(j).getWinsOnOtherRobots();
+                                        List<String> topWinsLeft = robotsInfo.get(i - 1).getWinsOnOtherRobots();
 
-
+                                        if (leftWinsTop == null && topWinsLeft == null) {
+                                            cellText = "?";
+                                        }
+                                        else {
+                                            if (leftWinsTop != null && leftWinsTop.contains(topRobot.getName()))
+                                                cellText = leftRobot.getName();
+                                            if (topWinsLeft != null && topWinsLeft.contains(leftRobot.getName()))
+                                                cellText = topRobot.getName();
+                                        }
+                                        if (Objects.equals(cellText, ""))
                                             cellTextView.setOnClickListener(view -> {
                                                 BattleDialog.openBattleDialog(activity, robotsInfo, leftRobot, topRobot);
                                             });
-                                        }
                                     }
+                                }
 
                 cellTextView.setText(cellText);
 

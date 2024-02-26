@@ -15,6 +15,13 @@ public class RobotInfo {
     private Integer wins = 0;
 
     List<String> winsOnOtherRobots = new ArrayList<>();
+
+    public void increaseLooses() {
+        looses++;
+    }
+    public void increaseWins() {
+        wins++;
+    }
     public Integer getLooses() {
         return looses;
     }

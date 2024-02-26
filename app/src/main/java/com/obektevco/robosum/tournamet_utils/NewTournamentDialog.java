@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,7 @@ public class NewTournamentDialog {
         seekBar.setMax(10);
         seekBar.setLayoutParams(seekBarParams);
         seekBar.getThumb().setTint(activity.getColor(R.color.text_main));
-        seekBar.getProgressDrawable().setColorFilter(activity.getColor(R.color.white), PorterDuff.Mode.MULTIPLY);
+        seekBar.getProgressDrawable().setColorFilter(activity.getColor(R.color.text_main), PorterDuff.Mode.MULTIPLY);
 
         TextView currentNumberTextView = new TextView(activity);
         currentNumberTextView.setTextSize(15);
@@ -209,7 +210,7 @@ public class NewTournamentDialog {
             robotWeightInput.setTypeface(typeface);
             robotWeightInput.setMaxLines(1);
             robotWeightInput.clearFocus();
-            //robotWeightInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+            robotWeightInput.setInputType(InputType.TYPE_CLASS_NUMBER);
             //robotWeightInput.setImeOptions(EditorInfo.IME_ACTION_DONE); // TODO: REMOVE THIS ON RELEASE
 
             inputLayout.addView(nameNumber);

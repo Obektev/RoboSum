@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RoboSumo</string>
+
+    <string name="made_by_obektev">Сделано Obektev</string>
+
+    <string name="no_tournaments_title">Пока что нет турниров</string>
+    <string name="no_tournaments_desc">Вы можете добавить соревнования, нажав на эту кнопку:</string>
+    <string name="generate_tournaments">Создать турнир</string>
+
+    <string name="comands_top">Рейтинг</string>
+    <string name="results">Результаты</string>
+    <string name="agenda">Расписание соревнований</string>
+    <string name="leaders">Лидеры</string>
+    <string name="create_new_partisapatements">Создать новые соревнования</string>
+
+    <string name="choose_number_of_teams">Выберите количество участников</string>
+    <string name="input_teams_names">Введите названия для <b>каждой</b> команды</string>
+    <string name="current_number">Текущее количество</string>
+    <string name="input_only_number">В числе не может быть букв</string>
+    <string name="input_text">Введите значение</string>
+    <string name="create">Создать</string>
+    <string name="cancel">Отмена</string>
+
+    <string name="winner">Победитель</string>
+    <string name="robot_name">Имя робота</string>
+    <string name="robot_weight">Вес робота</string>
+
+    <string name="weight">Вес</string>
+    <string name="place">Место</string>
+
+    <string name="name">Название</string>
+
+    <string name="tournament_table_deleted">Турнирная таблица удалена</string>
+    <string name="empty_name_or_weight">У какого-то робота нет названия или веса!</string>
+    <string name="too_big_weight">Вес не может быть больше 1000</string>
+    <string name="tournaments_table">Турнирная таблица</string>
+    <string name="delete_tournaments">Удалить таблицу</string>
+
+    <string name="battle">Сражение</string>
+    <string name="duel">Поединок</string>
+    <string name="first_duel">Первый поединок</string>
+    <string name="second_duel">Второй поединок</string>
+    <string name="third_duel">Третий поединок</string>
+
+    <string name="won">Выиграл</string>
+    <string name="cool">Отлично</string>
+
+    <string name="apply">Применить</string>
+    <string name="command_name">Название</string>
+    <string name="score">Счёт</string>
+    <string name="wins">Победы</string>
+    <string name="loses">Проигрыши</string>
+    <string name="draws">Ничьи</string>
+    <string name="draw">Ничья</string>
+    <string name="null_commands">Команд не может быть меньше 2</string>
+    <string name="game_results">Результаты игры</string>
+    <string name="good">Хорошо</string>
+
+    <string name="competition_ended">🥳 Соревнование закончено 🥳\nПобедитель:\n</string>
+    <string name="back">Назад</string>
+</resources>

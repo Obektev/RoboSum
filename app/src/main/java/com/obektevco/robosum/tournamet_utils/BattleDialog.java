@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class BattleDialog {
+    private static Dialog dialog = null;
     public static void openBattleDialog(Activity activity, List<RobotInfo> robots, RobotInfo leftRobot, RobotInfo topRobot) {
         String leftRobotName = leftRobot.getName();
         String topRobotName = topRobot.getName();
@@ -34,7 +35,7 @@ public class BattleDialog {
         Typeface typeface = ResourcesCompat.getFont(activity, R.font.aldrich);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-
+        
         TextView titleTextView = new TextView(activity);
         titleTextView.setTextColor(activity.getColor(R.color.semi_text));
         //titleTextView.setBackground(AppCompatResources.getDrawable(activity, R.drawable.cell_shape));
@@ -98,18 +99,22 @@ public class BattleDialog {
                 leftRobotButton.setBackgroundColor(activity.getColor(R.color.success_color));
 
                 Map<String, Integer> leftBattleScore = leftRobot.getBattleScore();
-                leftBattleScore.putIfAbsent(topRobot.getName(), 1);
+                leftBattleScore.putIfAbsent(topRobotName, 0);
 
-                Integer leftScore = leftBattleScore.get(topRobot.getName());
+                Integer leftScore = leftBattleScore.get(topRobotName);
                 leftScore++;
-                leftBattleScore.put(topRobot.getName(), leftScore);
+                leftBattleScore.put(topRobotName, leftScore);
 
                 if (leftScore >= 2) {
                     EZToast.toast(activity,
                             String.format("%s %s %s", leftRobotName,
                                     activity.getString(R.string.won),
                                     topRobotName));
+                    activity.recreate();
+                    //cancelDialog(); // Dumb non constant variables cannot be used in lambda expressions.
+                    leftRobot.increaseWins();
                     leftRobot.addWinOnOtherRobot(topRobotName);
+                    topRobot.increaseLooses();
                     TournamentsGson.saveRobotsInfo(activity, robots);
                 }
             });
@@ -119,7 +124,7 @@ public class BattleDialog {
                 topRobotButton.setBackgroundColor(activity.getColor(R.color.success_color));
 
                 Map<String, Integer> topBattleScore = topRobot.getBattleScore();
-                topBattleScore.putIfAbsent(topRobotName, 1);
+                topBattleScore.putIfAbsent(leftRobotName, 0);
 
                 Integer topScore = topBattleScore.get(leftRobotName);
                 topScore++;
@@ -130,7 +135,11 @@ public class BattleDialog {
                             String.format("%s %s %s", topRobotName,
                                     activity.getString(R.string.won),
                                     leftRobotName));
+                    activity.recreate();
+                    //cancelDialog(); // Dumb non constant variables cannot be used in lambda expressions.
+                    topRobot.increaseWins();
                     topRobot.addWinOnOtherRobot(leftRobotName);
+                    leftRobot.increaseLooses();
                     TournamentsGson.saveRobotsInfo(activity, robots);
                 }
             });
@@ -157,13 +166,18 @@ public class BattleDialog {
         applyButton.setBackground(AppCompatResources.getDrawable(activity, R.drawable.round_shape));
         //applyButton.setBackgroundTintList(ColorStateList.valueOf(activity.getColor(R.color.button_color)));
         applyButton.setLayoutParams(buttonParams);
+        applyButton.setOnClickListener(view -> dialog.cancel());
 
         dialogLayout.addView(applyButton);
 
         builder.setView(dialogLayout);
 
-        Dialog dialog = builder.create();
+        dialog = builder.create();
         dialog.show();
         Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(R.drawable.round_shape);
+    }
+
+    private static void cancelDialog() {
+        dialog.cancel();
     }
 }

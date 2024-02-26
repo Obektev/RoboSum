@@ -6,57 +6,57 @@
     <string name="no_tournaments_desc">You can add new competitions by pressing the following button:</string>
     <string name="generate_tournaments">Generate tournaments</string>
 
-    <string name="comands_top">Рейтинг</string>
-    <string name="results">Результаты</string>
-    <string name="agenda">Расписание соревнований</string>
-    <string name="leaders">Лидеры</string>
-    <string name="create_new_partisapatements">Создать новые соревнования</string>
-    <string name="new_company">Новые соревнования</string>
-    <string name="choose_number_of_teams">Выберите количество участников</string>
-    <string name="input_teams_names">Введите названия для <b>каждой</b> команды</string>
-    <string name="current_number">Текущее количество</string>
-    <string name="or_choose_another_way">Или введите число команд здесь:</string>
-    <string name="input_only_number">В числе не может быть букв</string>
-    <string name="input_text">Введите значение</string>
-    <string name="create">Создать</string>
-    <string name="cancel">Отмена</string>
+    <string name="comands_top">Rating</string>
+    <string name="results">Results</string>
+    <string name="agenda">Competition Schedule</string>
+    <string name="leaders">Leaders</string>
+    <string name="create_new_partisapatements">Create New Competitions</string>
 
-    <string name="robot_name">Имя робота</string>
-    <string name="robot_weight">Вес робота</string>
+    <string name="choose_number_of_teams">Choose Number of Participants</string>
+    <string name="input_teams_names">Enter names for <b>each</b> team</string>
+    <string name="current_number">Current number</string>
 
-    <string name="weight">Вес</string>
-    <string name="place">Место</string>
+    <string name="input_only_number">Only numbers allowed</string>
+    <string name="input_text">Enter value</string>
+    <string name="create">Create</string>
+    <string name="cancel">Cancel</string>
 
-    <string name="tournament_table_deleted">Турнирная таблица удалена</string>
-    <string name="empty_name_or_weight">У какого-то робота нет названия или веса!</string>
-    <string name="too_big_weight">Вес не может быть больше 1000</string>
-    <string name="tournaments_table">Турнирная таблица</string>
-    <string name="delete_tournaments">Удалить таблицу</string>
+    <string name="winner">Winner</string>
+    <string name="cool">Cool</string>
 
-    <string name="battle">Сражение</string>
-    <string name="duel">Поединок</string>
-    <string name="first_duel">Первый поединок</string>
-    <string name="second_duel">Второй поединок</string>
-    <string name="third_duel">Третий поединок</string>
+    <string name="robot_name">Robot Name</string>
+    <string name="robot_weight">Robot Weight</string>
 
-    <string name="won">Выиграл</string>
+    <string name="weight">Weight</string>
+    <string name="place">Place</string>
 
-    <string name="apply">Применить</string>
-    <string name="command_name">Название</string>
-    <string name="score">Счёт</string>
-    <string name="wins">Победы</string>
-    <string name="loses">Проигрыши</string>
-    <string name="draws">Ничьи</string>
-    <string name="draw">Ничья</string>
-    <string name="null_commands">Команд не может быть меньше 2</string>
-    <string name="who_won">Кто выйграл</string>
-    <string name="game_results">Результаты игры</string>
-    <string name="half_final">Полуфинал</string>
-    <string name="half_final_text">Первый этап турнира завершён. Начинается полуфинал. Добавлены новые дни соревнований</string>
-    <string name="good">Хорошо</string>
-    <string name="final_">Финал</string>
-    <string name="half_final_ended">Полуфинал окончен. Начинается финал соревнований. Добавлен новый день в расписании соревнований</string>
-    <string name="competition_ended">🥳 Соревнование закончено! 🥳\nПобедитель:\n</string>
-    <string name="back">Назад</string>
+    <string name="name">Name</string>
+
+    <string name="tournament_table_deleted">Tournament table deleted</string>
+    <string name="empty_name_or_weight">Some robot is missing a name or weight!</string>
+    <string name="too_big_weight">Weight cannot be greater than 1000</string>
+    <string name="tournaments_table">Tournament Table</string>
+    <string name="delete_tournaments">Delete Table</string>
+
+    <string name="battle">Battle</string>
+    <string name="duel">Duel</string>
+    <string name="first_duel">First Duel</string>
+    <string name="second_duel">Second Duel</string>
+    <string name="third_duel">Third Duel</string>
+
+    <string name="won">Won</string>
+
+    <string name="apply">Apply</string>
+    <string name="command_name">Name</string>
+    <string name="score">Score</string>
+    <string name="wins">Wins</string>
+    <string name="loses">Losses</string>
+    <string name="draws">Draws</string>
+    <string name="draw">Draw</string>
+    <string name="null_commands">Cannot have less than 2 teams</string>
+    <string name="game_results">Game Results</string>
+    <string name="good">Good</string>
+    <string name="competition_ended">🥳 Competition ended 🥳\nWinner:\n</string>
+    <string name="back">Back</string>
 
 </resources>
